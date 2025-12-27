@@ -68,6 +68,13 @@ export default defineConfig(
       "@typescript-eslint/no-unsafe-return": "warn",
     },
   },
+  // Config for Remix route files (allow loader/action exports)
+  {
+    files: ["app/routes/**/*.{ts,tsx}"],
+    rules: {
+      "react-refresh/only-export-components": "off",
+    },
+  },
   // Non-type-checked config for test files (more lenient)
   {
     files: ["**/*.test.{ts,tsx}", "**/*.spec.{ts,tsx}"],

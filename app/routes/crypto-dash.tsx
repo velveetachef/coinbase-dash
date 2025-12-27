@@ -14,8 +14,12 @@ export async function loader() {
   }
 }
 
+type LoaderData = {
+  cryptoData: CryptoData[];
+};
+
 export default function CryptoDash() {
-  const { cryptoData } = useLoaderData<typeof loader>();
+  const { cryptoData } = useLoaderData<LoaderData>();
   const [filter, setFilter] = useState("");
 
   const filteredCryptoData = useMemo(() => {

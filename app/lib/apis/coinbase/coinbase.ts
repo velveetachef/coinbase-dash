@@ -35,7 +35,7 @@ export async function fetchExchangeRates(
     throw new Error(`Failed to fetch exchange rates for ${currency}`);
   }
 
-  return response.json();
+  return (await response.json()) as CoinbaseExchangeRatesResponse;
 }
 
 export interface CoinbaseExchangeRatesResponse {
