@@ -1,5 +1,5 @@
 import { redirect } from "@remix-run/node";
 
-export async function loader() {
+export function loader() {
   return redirect("/crypto-dash", { status: 301 });
 }

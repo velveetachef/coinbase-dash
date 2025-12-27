@@ -41,9 +41,7 @@ describe("crypto-dash route", () => {
     it("should return crypto data on success", async () => {
       vi.mocked(getCryptoData).mockResolvedValueOnce(mockCryptoData);
 
-      const request = new Request("http://localhost/crypto-dash");
-      const response = await loader({ request, params: {}, context: {} } as any);
-
+      const response = await loader();
       expect(response).toBeInstanceOf(Response);
       const data = await response.json();
       expect(data.cryptoData).toEqual(mockCryptoData);
@@ -54,12 +52,10 @@ describe("crypto-dash route", () => {
 
       const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
 
-      const request = new Request("http://localhost/crypto-dash");
-      const response = await loader({ request, params: {}, context: {} } as any);
-
+      const response = await loader();
       const data = await response.json();
       expect(data.cryptoData).toEqual([]);
-      expect(consoleSpy).toHaveBeenCalledWith("Error fetching crypto data:", expect.any(Error));
+      expect(consoleSpy).toHaveBeenCalledWith("Error fetching crypto data:", expect.any(Error))
 
       consoleSpy.mockRestore();
     });

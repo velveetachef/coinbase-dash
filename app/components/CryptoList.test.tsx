@@ -14,10 +14,10 @@ vi.mock("@dnd-kit/core", () => ({
 }));
 
 vi.mock("@dnd-kit/sortable", () => ({
-  arrayMove: vi.fn((arr, oldIndex, newIndex) => {
+  arrayMove: vi.fn((arr: unknown[], oldIndex: number, newIndex: number) => {
     const newArr = [...arr];
-    const [removed] = newArr.splice(oldIndex, 1);
-    newArr.splice(newIndex, 0, removed);
+    const [removed] = newArr.splice(Number(oldIndex), 1);
+    newArr.splice(Number(newIndex), 0, removed);
     return newArr;
   }),
   SortableContext: ({ children }: { children: React.ReactNode }) => (
