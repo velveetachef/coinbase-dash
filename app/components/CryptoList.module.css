@@ -1,0 +1,31 @@
+.list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0;
+}
+
+@media (min-width: 640px) {
+  .list {
+    grid-template-columns: repeat(auto-fill, minmax(var(--grid-min-column-width), 1fr));
+    gap: var(--spacing-lg);
+  }
+}
+
+/* Transform and transition are applied inline for drag-and-drop functionality */
+.sortableItem {
+  /* Intentionally empty - styles applied via inline styles from @dnd-kit */
+}
+
+.dragHandle {
+  cursor: grab;
+}
+
+.dragHandle:active {
+  cursor: grabbing;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+

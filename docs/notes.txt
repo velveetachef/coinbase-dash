@@ -1,0 +1,30 @@
+
+coinbase
+- No API key required for read-only market data (10 requests/sec)
+- https://api.coinbase.com/v2/currencies/crypto (list with names and ids)
+- https://api.coinbase.com/v2/exchange-rates?currency=USD returns rates for all supported cryptocurrencies
+- https://api.coinbase.com/v2/exchange-rates?currency=BTC returns rates for all supported cryptocurrencies
+- combine data
+
+Use const cryptoNamesById = {
+  "BTC": "Bitcoin",
+  "ETH": "Ethereum",
+  "LTC": "Litecoin",
+  "BCH": "Bitcoin Cash",
+  "ETC": "Ethereum Classic",
+  "ZRX": "0x Protocol",
+  "USDC": "USDC",
+  "BAT": "Basic Attention Token",
+  "ZEC": "Zcash",
+  "XRP": "XRP"
+};
+
+Use volta for node version management
+# install Volta
+curl https://get.volta.sh | bash
+
+
+Use quick start guide: https://v2.remix.run/docs/start/quickstart (without react router v7)
+
+
+
