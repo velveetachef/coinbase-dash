@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRemixStub } from "@remix-run/testing";
 import cryptoDashRoute, { loader } from "./crypto-dash";
@@ -221,6 +221,207 @@ describe("crypto-dash route", () => {
       expect(
         await screen.findByText("No cryptocurrency data available.")
       ).toBeInTheDocument();
+    });
+
+    it("should render refresh button", async () => {
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      const refreshButton = await screen.findByRole("button", {
+        name: /Refresh data/i,
+      });
+      expect(refreshButton).toBeInTheDocument();
+      expect(refreshButton).toHaveTextContent("Refresh");
+    });
+
+    it("should render auto-refresh toggle button", async () => {
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      const autoRefreshButton = await screen.findByRole("button", {
+        name: /Enable auto-refresh/i,
+      });
+      expect(autoRefreshButton).toBeInTheDocument();
+      expect(autoRefreshButton).toHaveTextContent("Auto-refresh OFF");
+    });
+
+    it("should toggle auto-refresh state", async () => {
+      const user = userEvent.setup();
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      const autoRefreshButton = await screen.findByRole("button", {
+        name: /Enable auto-refresh/i,
+      });
+
+      await user.click(autoRefreshButton);
+
+      expect(
+        await screen.findByRole("button", { name: /Disable auto-refresh/i })
+      ).toBeInTheDocument();
+      expect(autoRefreshButton).toHaveTextContent("Auto-refresh ON");
+
+      await user.click(autoRefreshButton);
+
+      expect(
+        await screen.findByRole("button", { name: /Enable auto-refresh/i })
+      ).toBeInTheDocument();
+      expect(autoRefreshButton).toHaveTextContent("Auto-refresh OFF");
+    });
+
+    it("should call revalidate when refresh button is clicked", async () => {
+      const user = userEvent.setup();
+      let loaderCallCount = 0;
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => {
+            loaderCallCount++;
+            return { cryptoData: mockCryptoData };
+          },
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      await screen.findByText("Cryptocurrency Dashboard");
+      const initialCallCount = loaderCallCount;
+
+      const refreshButton = await screen.findByRole("button", {
+        name: /Refresh data/i,
+      });
+
+      await user.click(refreshButton);
+
+      await waitFor(() => {
+        expect(loaderCallCount).toBeGreaterThan(initialCallCount);
+      });
+    });
+
+    it("should disable refresh button while refreshing", async () => {
+      const user = userEvent.setup();
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => {
+            await new Promise((resolve) => setTimeout(resolve, 100));
+            return { cryptoData: mockCryptoData };
+          },
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      const refreshButton = await screen.findByRole("button", {
+        name: /Refresh data/i,
+      });
+
+      await user.click(refreshButton);
+
+      expect(refreshButton).toBeDisabled();
+      expect(await screen.findByText("Refreshing...")).toBeInTheDocument();
+    });
+
+    it("should set up auto-refresh interval when enabled", async () => {
+      const user = userEvent.setup();
+      const setIntervalSpy = vi.spyOn(global, "setInterval");
+
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      await screen.findByText("Cryptocurrency Dashboard");
+
+      // Clear any intervals set up during initial render
+      setIntervalSpy.mockClear();
+
+      const autoRefreshButton = await screen.findByRole("button", {
+        name: /Enable auto-refresh/i,
+      });
+
+      // Enable auto-refresh
+      await user.click(autoRefreshButton);
+
+      // Verify interval is set up with 5000ms
+      expect(setIntervalSpy).toHaveBeenCalledWith(expect.any(Function), 5000);
+
+      setIntervalSpy.mockRestore();
+    });
+
+    it("should clear auto-refresh interval when disabled", async () => {
+      const user = userEvent.setup();
+      const setIntervalSpy = vi.spyOn(global, "setInterval");
+      const clearIntervalSpy = vi.spyOn(global, "clearInterval");
+
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      await screen.findByText("Cryptocurrency Dashboard");
+
+      // Clear any intervals set up during initial render
+      setIntervalSpy.mockClear();
+      clearIntervalSpy.mockClear();
+
+      const autoRefreshButton = await screen.findByRole("button", {
+        name: /Enable auto-refresh/i,
+      });
+
+      // Enable auto-refresh
+      await user.click(autoRefreshButton);
+
+      // Verify interval is set up with 5000ms
+      const intervalCalls = setIntervalSpy.mock.calls.filter(
+        (call) => call[1] === 5000
+      );
+      expect(intervalCalls.length).toBeGreaterThan(0);
+      clearIntervalSpy.mockClear();
+
+      // Disable auto-refresh
+      await user.click(autoRefreshButton);
+
+      // Verify interval is cleared
+      expect(clearIntervalSpy).toHaveBeenCalled();
+      const clearedInterval = clearIntervalSpy.mock.calls[0][0];
+      expect(clearedInterval).toBeDefined();
+
+      setIntervalSpy.mockRestore();
+      clearIntervalSpy.mockRestore();
     });
   });
 });
