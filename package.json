@@ -3,15 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "type": "module",
-  "main": "index.js",
-  "directories": {
-    "doc": "docs"
-  },
   "scripts": {
     "dev": "remix vite:dev",
     "build": "remix vite:build",
     "start": "remix-serve build/server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
@@ -40,10 +38,17 @@
   },
   "devDependencies": {
     "@remix-run/dev": "^2.17.2",
+    "@remix-run/testing": "^2.17.2",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^25.0.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
+    "@vitest/ui": "^4.0.16",
+    "jsdom": "^27.4.0",
     "typescript": "^5.9.3",
-    "vite": "^6.4.1"
+    "vite": "^6.4.1",
+    "vitest": "^4.0.16"
   }
 }

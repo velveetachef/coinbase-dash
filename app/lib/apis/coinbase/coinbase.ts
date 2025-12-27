@@ -38,7 +38,7 @@ export async function fetchExchangeRates(
   return response.json();
 }
 
-interface CoinbaseExchangeRatesResponse {
+export interface CoinbaseExchangeRatesResponse {
   data: {
     currency: string;
     rates: Record<string, string>;

@@ -35,4 +35,3 @@ export function CryptoCard({ crypto }: CryptoCardProps) {
     </div>
   );
 }
-
