@@ -45,6 +45,7 @@
 }
 
 body {
+  font-family: var(--font-family);
   background-color: var(--color-bg-secondary);
   color: var(--color-text);
   transition:
