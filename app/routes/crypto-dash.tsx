@@ -1,18 +1,18 @@
 import { useState, useMemo, useEffect } from "react";
 import { useLoaderData, useRevalidator } from "@remix-run/react";
-import { json } from "@remix-run/node";
 import { getCryptoData, type CryptoData } from "../lib";
-import { useTheme } from "../hooks";
 import { CryptoList } from "../components/CryptoList";
+import { RefreshControls } from "../components/RefreshControls";
+import { ThemeToggle } from "../components/ThemeToggle";
 import styles from "../styles/crypto-dash.module.css";
 
 export async function loader() {
   try {
     const cryptoData = await getCryptoData();
-    return json({ cryptoData });
+    return Response.json({ cryptoData });
   } catch (error) {
     console.error("Error fetching crypto data:", error);
-    return json({ cryptoData: [] });
+    return Response.json({ cryptoData: [] });
   }
 }
 
@@ -25,7 +25,6 @@ export default function CryptoDash() {
   const { cryptoData } = useLoaderData<LoaderData>();
   const [filter, setFilter] = useState("");
   const [autoRefresh, setAutoRefresh] = useState(false);
-  const { theme, toggleTheme } = useTheme();
 
   const isRefreshing = revalidator.state === "loading";
 
@@ -63,65 +62,13 @@ export default function CryptoDash() {
         <div className={styles.header}>
           <h1 className={styles.title}>Cryptocurrency Dashboard</h1>
           <div className={styles.controls}>
-            <div className={styles.refreshControls}>
-              <button
-                type="button"
-                onClick={handleManualRefresh}
-                disabled={isRefreshing}
-                className={styles.refreshButton}
-                aria-label="Refresh data"
-              >
-                {isRefreshing ? (
-                  <>
-                    <span className={styles.spinner} aria-hidden="true" />
-                    Refreshing...
-                  </>
-                ) : (
-                  <>
-                    <span aria-hidden="true">↻</span>
-                    Refresh
-                  </>
-                )}
-              </button>
-              <button
-                type="button"
-                onClick={() => setAutoRefresh(!autoRefresh)}
-                className={`${styles.autoRefreshButton} ${
-                  autoRefresh ? styles.active : ""
-                }`}
-                aria-label={autoRefresh ? "Disable auto-refresh" : "Enable auto-refresh"}
-              >
-                {autoRefresh ? (
-                  <>
-                    <span aria-hidden="true">⏸</span>
-                    Auto-refresh ON
-                  </>
-                ) : (
-                  <>
-                    <span aria-hidden="true">▶</span>
-                    Auto-refresh OFF
-                  </>
-                )}
-              </button>
-            </div>
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className={styles.themeToggle}
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {theme === "dark" ? (
-                <>
-                  <span aria-hidden="true">☀️</span>
-                  Light
-                </>
-              ) : (
-                <>
-                  <span aria-hidden="true">🌙</span>
-                  Dark
-                </>
-              )}
-            </button>
+            <RefreshControls
+              isRefreshing={isRefreshing}
+              autoRefresh={autoRefresh}
+              onRefresh={handleManualRefresh}
+              onToggleAutoRefresh={() => setAutoRefresh(!autoRefresh)}
+            />
+            <ThemeToggle />
           </div>
         </div>
 
