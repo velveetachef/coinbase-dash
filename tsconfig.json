@@ -19,4 +19,3 @@
     "noEmit": true // TypeScript only type-checks; Vite handles the build output.
   }
 }
-

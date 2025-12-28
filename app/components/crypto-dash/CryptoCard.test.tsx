@@ -94,4 +94,3 @@ describe("CryptoCard", () => {
     expect(screen.getByText(/\$1,234,567\.89/)).toBeInTheDocument();
   });
 });
-

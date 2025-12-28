@@ -1,10 +1,6 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-} from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
 import "./styles/variables.css";
+import "./styles/theme.css";
 
 /**
  * Added suppressHydrationWarning to the <html> element. This tells React to ignore hydration mismatches for this element, which is safe because:
@@ -19,9 +15,10 @@ export default function App() {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
-          rel="icon"
-          href="data:image/x-icon;base64,AA"
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap"
         />
+        <link rel="icon" href="data:image/x-icon;base64,AA" />
         <Meta />
         <Links />
         <script src="/theme-init.js" />
@@ -33,4 +30,3 @@ export default function App() {
     </html>
   );
 }
-

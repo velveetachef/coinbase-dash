@@ -3,7 +3,7 @@
  * Runs immediately on page load to prevent FOUC (Flash of Unstyled Content)
  * Must be plain JavaScript (no modules) to run synchronously before React hydrates
  */
-(function() {
+(function () {
   try {
     const THEME_STORAGE_KEY = "theme";
 

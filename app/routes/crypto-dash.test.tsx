@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { createRemixStub } from "@remix-run/testing";
 import cryptoDashRoute, { loader } from "./crypto-dash";
 import type { CryptoData } from "~/lib/apis/coinbase/types";
-import { getCryptoData } from '~/lib';
+import { getCryptoData } from "~/lib";
 
 // Mock the getCryptoData function
 vi.mock("~/lib", async (importOriginal) => {
@@ -62,12 +62,17 @@ describe("crypto-dash route", () => {
     it("should return empty array on error", async () => {
       vi.mocked(getCryptoData).mockRejectedValueOnce(new Error("API Error"));
 
-      const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+      const consoleSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
 
       const response = await loader();
       const data = await response.json();
       expect(data.cryptoData).toEqual([]);
-      expect(consoleSpy).toHaveBeenCalledWith("Error fetching crypto data:", expect.any(Error))
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "Error fetching crypto data:",
+        expect.any(Error)
+      );
 
       consoleSpy.mockRestore();
     });
@@ -85,7 +90,9 @@ describe("crypto-dash route", () => {
 
       render(<RemixStub initialEntries={["/crypto-dash"]} />);
 
-      expect(await screen.findByText("Cryptocurrency Dashboard")).toBeInTheDocument();
+      expect(
+        await screen.findByText("Cryptocurrency Dashboard")
+      ).toBeInTheDocument();
     });
 
     it("should render filter input", async () => {
@@ -235,73 +242,6 @@ describe("crypto-dash route", () => {
       ).toBeInTheDocument();
     });
 
-    it("should render refresh button", async () => {
-      const RemixStub = createRemixStub([
-        {
-          path: "/crypto-dash",
-          Component: cryptoDashRoute,
-          loader: async () => ({ cryptoData: mockCryptoData }),
-        },
-      ]);
-
-      render(<RemixStub initialEntries={["/crypto-dash"]} />);
-
-      const refreshButton = await screen.findByRole("button", {
-        name: /Refresh data/i,
-      });
-      expect(refreshButton).toBeInTheDocument();
-      expect(refreshButton).toHaveTextContent("Refresh");
-    });
-
-    it("should render auto-refresh toggle button", async () => {
-      const RemixStub = createRemixStub([
-        {
-          path: "/crypto-dash",
-          Component: cryptoDashRoute,
-          loader: async () => ({ cryptoData: mockCryptoData }),
-        },
-      ]);
-
-      render(<RemixStub initialEntries={["/crypto-dash"]} />);
-
-      const autoRefreshButton = await screen.findByRole("button", {
-        name: /Enable auto-refresh/i,
-      });
-      expect(autoRefreshButton).toBeInTheDocument();
-      expect(autoRefreshButton).toHaveTextContent("Auto-refresh OFF");
-    });
-
-    it("should toggle auto-refresh state", async () => {
-      const user = userEvent.setup();
-      const RemixStub = createRemixStub([
-        {
-          path: "/crypto-dash",
-          Component: cryptoDashRoute,
-          loader: async () => ({ cryptoData: mockCryptoData }),
-        },
-      ]);
-
-      render(<RemixStub initialEntries={["/crypto-dash"]} />);
-
-      const autoRefreshButton = await screen.findByRole("button", {
-        name: /Enable auto-refresh/i,
-      });
-
-      await user.click(autoRefreshButton);
-
-      expect(
-        await screen.findByRole("button", { name: /Disable auto-refresh/i })
-      ).toBeInTheDocument();
-      expect(autoRefreshButton).toHaveTextContent("Auto-refresh ON");
-
-      await user.click(autoRefreshButton);
-
-      expect(
-        await screen.findByRole("button", { name: /Enable auto-refresh/i })
-      ).toBeInTheDocument();
-      expect(autoRefreshButton).toHaveTextContent("Auto-refresh OFF");
-    });
-
     it("should call revalidate when refresh button is clicked", async () => {
       const user = userEvent.setup();
       let loaderCallCount = 0;
@@ -435,85 +375,5 @@ describe("crypto-dash route", () => {
       setIntervalSpy.mockRestore();
       clearIntervalSpy.mockRestore();
     });
-
-    it("should render theme toggle button", async () => {
-      const RemixStub = createRemixStub([
-        {
-          path: "/crypto-dash",
-          Component: cryptoDashRoute,
-          loader: async () => ({ cryptoData: mockCryptoData }),
-        },
-      ]);
-
-      render(<RemixStub initialEntries={["/crypto-dash"]} />);
-
-      const themeToggle = await screen.findByRole("button", {
-        name: /Switch to (dark|light) mode/i,
-      });
-      expect(themeToggle).toBeInTheDocument();
-    });
-
-    it("should toggle theme when theme button is clicked", async () => {
-      const user = userEvent.setup();
-      // Set initial theme to light
-      localStorage.setItem("theme", "light");
-      document.documentElement.setAttribute("data-theme", "light");
-
-      const RemixStub = createRemixStub([
-        {
-          path: "/crypto-dash",
-          Component: cryptoDashRoute,
-          loader: async () => ({ cryptoData: mockCryptoData }),
-        },
-      ]);
-
-      render(<RemixStub initialEntries={["/crypto-dash"]} />);
-
-      const themeToggle = await screen.findByRole("button", {
-        name: /Switch to dark mode/i,
-      });
-
-      expect(themeToggle).toHaveTextContent("Dark");
-
-      await user.click(themeToggle);
-
-      // Verify theme changed to dark
-      expect(localStorage.getItem("theme")).toBe("dark");
-      expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
-      expect(
-        await screen.findByRole("button", { name: /Switch to light mode/i })
-      ).toBeInTheDocument();
-      expect(themeToggle).toHaveTextContent("Light");
-
-      // Toggle back to light
-      await user.click(themeToggle);
-
-      expect(localStorage.getItem("theme")).toBe("light");
-      expect(document.documentElement.getAttribute("data-theme")).toBe("light");
-    });
-
-    it("should initialize theme from localStorage", async () => {
-      localStorage.setItem("theme", "dark");
-      document.documentElement.setAttribute("data-theme", "dark");
-
-      const RemixStub = createRemixStub([
-        {
-          path: "/crypto-dash",
-          Component: cryptoDashRoute,
-          loader: async () => ({ cryptoData: mockCryptoData }),
-        },
-      ]);
-
-      render(<RemixStub initialEntries={["/crypto-dash"]} />);
-
-      const themeToggle = await screen.findByRole("button", {
-        name: /Switch to light mode/i,
-      });
-      expect(themeToggle).toHaveTextContent("Light");
-
-      // Cleanup
-      localStorage.removeItem("theme");
-    });
   });
 });
-

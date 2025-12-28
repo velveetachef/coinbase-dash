@@ -5,7 +5,9 @@ import type { CryptoData } from "~/lib/apis/coinbase/types";
 
 // Mock the dnd-kit modules
 vi.mock("@dnd-kit/core", () => ({
-  DndContext: ({ children }: { children: React.ReactNode }) => <div data-testid="dnd-context">{children}</div>,
+  DndContext: ({ children }: { children: React.ReactNode }) => (
+    <div data-testid="dnd-context">{children}</div>
+  ),
   closestCenter: vi.fn(),
   KeyboardSensor: vi.fn(),
   PointerSensor: vi.fn(),
@@ -127,4 +129,3 @@ describe("CryptoList", () => {
     expect(screen.getByTestId("sortable-context")).toBeInTheDocument();
   });
 });
-

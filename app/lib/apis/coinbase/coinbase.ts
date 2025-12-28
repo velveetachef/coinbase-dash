@@ -44,4 +44,3 @@ export interface CoinbaseExchangeRatesResponse {
     rates: Record<string, string>;
   };
 }
-

@@ -117,6 +117,7 @@ curl https://get.volta.sh | bash
 ```
 
 **Verify Volta is installed:**
+
 ```bash
 volta --version
 ```
@@ -165,6 +166,7 @@ npm run lint:fix
 ```
 
 ## Notes & Decisions
+
 - **remix scaffold**: used the quick start guide: https://v2.remix.run/docs/start/quickstart (without react router v7)
 - **CryptoCurrency list**: symbol to name mapping sourced from public endpoint `https://api.coinbase.com/v2/currencies/crypto` and saved in constant `cryptoNamesBySymbol` for demo simplicity.
 - **Exchange Rates API**: USD and BTC exchange rates sourced form public endpoint `https://api.coinbase.com/v2/exchange-rates?currency=<currency>`
@@ -178,4 +180,3 @@ npm run lint:fix
 ## License
 
 ISC
-

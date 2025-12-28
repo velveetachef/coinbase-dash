@@ -184,4 +184,3 @@ describe("useTheme", () => {
     expect(result.current.theme).toBe("dark");
   });
 });
-

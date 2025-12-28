@@ -4,7 +4,11 @@
   padding: var(--spacing-lg);
   background-color: var(--color-bg);
   box-shadow: var(--shadow-sm);
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast), border-color var(--transition-fast);
+  transition:
+    transform var(--transition-fast),
+    box-shadow var(--transition-fast),
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .card:hover {
@@ -49,4 +53,3 @@
   color: var(--color-text);
   transition: color var(--transition-fast);
 }
-
