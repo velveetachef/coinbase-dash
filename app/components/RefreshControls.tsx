@@ -13,6 +13,40 @@ export function RefreshControls({
   onRefresh,
   onToggleAutoRefresh,
 }: RefreshControlsProps) {
+  const renderRefreshButton = () => {
+    if (isRefreshing) {
+      return (
+        <>
+          <span className={styles.spinner} aria-hidden="true" />
+          Refreshing...
+        </>
+      );
+    }
+    return (
+      <>
+        <span aria-hidden="true">↻</span>
+        Refresh
+      </>
+    );
+  };
+
+  const renderAutoRefreshButton = () => {
+    if (autoRefresh) {
+      return (
+        <>
+          <span aria-hidden="true">⏸</span>
+          Disable Auto-Refresh
+        </>
+      )
+    }
+    return (
+      <>
+        <span aria-hidden="true">▶</span>
+        Enable Auto-Refresh
+      </>
+    );
+  };
+
   return (
     <div className={styles.refreshControls}>
       <button
@@ -22,17 +56,7 @@ export function RefreshControls({
         className={styles.refreshButton}
         aria-label="Refresh data"
       >
-        {isRefreshing ? (
-          <>
-            <span className={styles.spinner} aria-hidden="true" />
-            Refreshing...
-          </>
-        ) : (
-          <>
-            <span aria-hidden="true">↻</span>
-            Refresh
-          </>
-        )}
+        {renderRefreshButton()}
       </button>
       <button
         type="button"
@@ -42,19 +66,8 @@ export function RefreshControls({
         }`}
         aria-label={autoRefresh ? "Disable auto-refresh" : "Enable auto-refresh"}
       >
-        {autoRefresh ? (
-          <>
-            <span aria-hidden="true">⏸</span>
-            Auto-refresh ON
-          </>
-        ) : (
-          <>
-            <span aria-hidden="true">▶</span>
-            Auto-refresh OFF
-          </>
-        )}
+        {renderAutoRefreshButton()}
       </button>
     </div>
   );
 }
-

@@ -43,7 +43,7 @@ describe("RefreshControls", () => {
       name: /Enable auto-refresh/i,
     });
     expect(autoRefreshButton).toBeInTheDocument();
-    expect(autoRefreshButton).toHaveTextContent("Auto-refresh OFF");
+    expect(autoRefreshButton).toHaveTextContent("Enable Auto-Refresh");
   });
 
   it("should call onRefresh when refresh button is clicked", async () => {
@@ -117,7 +117,7 @@ describe("RefreshControls", () => {
     expect(spinner).toBeInTheDocument();
   });
 
-  it("should show auto-refresh ON state when autoRefresh is true", () => {
+  it("should show Disable Auto-Refresh state when autoRefresh is true", () => {
     render(
       <RefreshControls
         isRefreshing={false}
@@ -131,7 +131,7 @@ describe("RefreshControls", () => {
       name: /Disable auto-refresh/i,
     });
     expect(autoRefreshButton).toBeInTheDocument();
-    expect(autoRefreshButton).toHaveTextContent("Auto-refresh ON");
+    expect(autoRefreshButton).toHaveTextContent("Disable Auto-Refresh");
   });
 
   it("should toggle auto-refresh button state", async () => {
@@ -148,7 +148,7 @@ describe("RefreshControls", () => {
     let autoRefreshButton = screen.getByRole("button", {
       name: /Enable auto-refresh/i,
     });
-    expect(autoRefreshButton).toHaveTextContent("Auto-refresh OFF");
+    expect(autoRefreshButton).toHaveTextContent("Enable Auto-Refresh");
 
     // Simulate toggle
     await user.click(autoRefreshButton);
@@ -167,7 +167,7 @@ describe("RefreshControls", () => {
     autoRefreshButton = screen.getByRole("button", {
       name: /Disable auto-refresh/i,
     });
-    expect(autoRefreshButton).toHaveTextContent("Auto-refresh ON");
+    expect(autoRefreshButton).toHaveTextContent("Disable Auto-Refresh");
   });
 });
 

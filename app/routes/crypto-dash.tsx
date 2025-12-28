@@ -75,7 +75,7 @@ export default function CryptoDash() {
         <div className={styles.filterContainer}>
           <input
             type="text"
-            placeholder="Filter by name or symbol (e.g., 'eth' or 'Ethereum')"
+            placeholder="Filter by name or symbol"
             value={filter}
             onChange={(e) => setFilter(e.target.value)}
             className={styles.filterInput}
