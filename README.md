@@ -20,33 +20,50 @@ A dynamic, real-time cryptocurrency dashboard built with Remix and React that di
   - TypeScript ESLint
 - **Styling**: CSS Modules with CSS Variables for theming
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 coinbase-dash/
 ├── app/
 │   ├── components/          # React components
-│   │   ├── CryptoCard.tsx   # Individual crypto card component
-│   │   ├── CryptoList.tsx   # List with drag-and-drop
-│   │   └── *.module.css     # Component styles
+│   │   ├── crypto-dash/     # Crypto dashboard components
+│   │   │   ├── CryptoCard.tsx          # Individual crypto card component
+│   │   │   ├── CryptoCard.module.css   # CryptoCard styles
+│   │   │   ├── CryptoList.tsx          # List with drag-and-drop
+│   │   │   ├── CryptoList.module.css   # CryptoList styles
+│   │   │   ├── RefreshControls.tsx     # Refresh controls component
+│   │   │   ├── RefreshControls.module.css # RefreshControls styles
+│   │   │   ├── ThemeToggle.tsx         # Theme toggle component
+│   │   │   └── ThemeToggle.module.css  # ThemeToggle styles
+│   │   └── index.ts         # Component exports
 │   ├── hooks/               # Custom React hooks
-│   │   └── useTheme.ts      # Theme management hook
+│   │   ├── useTheme.ts      # Theme management hook
+│   │   └── index.ts         # Hook exports
 │   ├── lib/                 # Utilities and API clients
 │   │   ├── apis/
 │   │   │   └── coinbase/    # Coinbase API integration
-│   │   └── utils/           # Shared utilities
+│   │   │       ├── coinbase.ts      # API client
+│   │   │       ├── constants.ts     # API constants
+│   │   │       └── types.ts        # TypeScript types
+│   │   ├── utils/           # Shared utilities
+│   │   │   └── theme-utils.ts # Theme utility functions
+│   │   └── index.ts         # Library exports
 │   ├── routes/              # Remix routes
 │   │   ├── _index.tsx       # Home route (redirect to crypto-dash)
 │   │   └── crypto-dash.tsx  # Main dashboard route
 │   ├── styles/              # Global styles
 │   │   ├── variables.css    # CSS variables & theme
-│   │   └── *.module.css     # Route-specific styles
+│   │   ├── theme.css        # Theme styles
+│   │   └── crypto-dash.module.css # Route-specific styles
 │   └── root.tsx             # App root component
 ├── public/                  # Static assets
 │   └── theme-init.js        # Theme initialization script
-└── docs/                    # Documentation
-    ├── requirements         # Project requirements
-    └── notes.txt            # Development notes
+├── docs/                    # Documentation
+│   ├── requirements.md      # Project requirements
+│   └── notes.txt            # Development notes
+├── eslint.config.js         # ESLint configuration
+├── tsconfig.json            # TypeScript configuration
+└── vite.config.ts           # Vite configuration
 ```
 
 ## Requirements Completed
