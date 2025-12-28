@@ -18,11 +18,17 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  box-sizing: border-box;
+  line-height: 1;
+  min-height: 2.5rem;
 }
 
-.refreshButton:hover:not(:disabled),
+.refreshButton:hover:not(:disabled) {
+  background-color: var(--color-primary-hover);
+}
+
 .autoRefreshButton:hover {
-  background-color: #0056b3;
+  background-color: var(--color-gray-700);
 }
 
 .refreshButton:disabled {
@@ -35,11 +41,11 @@
 }
 
 .autoRefreshButton.active {
-  background-color: #28a745;
+  background-color: var(--color-success);
 }
 
 .autoRefreshButton.active:hover {
-  background-color: #218838;
+  background-color: var(--color-success-hover);
 }
 
 .spinner {
