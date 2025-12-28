@@ -1,9 +1,7 @@
 import { useState, useMemo, useEffect } from "react";
 import { useLoaderData, useRevalidator } from "@remix-run/react";
 import { getCryptoData, type CryptoData } from "../lib";
-import { CryptoList } from "../components/CryptoList";
-import { RefreshControls } from "../components/RefreshControls";
-import { ThemeToggle } from "../components/ThemeToggle";
+import { CryptoList, RefreshControls, ThemeToggle } from "../components";
 import styles from "../styles/crypto-dash.module.css";
 
 export async function loader() {
