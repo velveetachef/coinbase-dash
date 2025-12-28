@@ -30,8 +30,7 @@ coinbase-dash/
 │   │   ├── CryptoList.tsx   # List with drag-and-drop
 │   │   └── *.module.css     # Component styles
 │   ├── hooks/               # Custom React hooks
-│   │   ├── useTheme.ts      # Theme management hook
-│   │   └── *.test.ts        # Hook tests
+│   │   └── useTheme.ts      # Theme management hook
 │   ├── lib/                 # Utilities and API clients
 │   │   ├── apis/
 │   │   │   └── coinbase/    # Coinbase API integration
@@ -45,11 +44,9 @@ coinbase-dash/
 │   └── root.tsx             # App root component
 ├── public/                  # Static assets
 │   └── theme-init.js        # Theme initialization script
-├── docs/                    # Documentation
-│   ├── requirements         # Project requirements
-│   └── notes.txt            # Development notes
-└── tests/                   # Test configuration
-    └── vitest.setup.ts      # Test setup
+└── docs/                    # Documentation
+    ├── requirements         # Project requirements
+    └── notes.txt            # Development notes
 ```
 
 ## ✅ Requirements Completed
