@@ -24,38 +24,6 @@ interface CryptoListProps {
   cryptos: CryptoData[];
 }
 
-interface SortableCryptoCardProps {
-  crypto: CryptoData;
-}
-
-function SortableCryptoCard({ crypto }: SortableCryptoCardProps) {
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging,
-  } = useSortable({ id: crypto.symbol });
-
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  };
-
-  return (
-    <div
-      ref={setNodeRef}
-      style={style}
-      className={`${styles.sortableItem} ${isDragging ? styles.dragging : ""}`}
-    >
-      <div {...attributes} {...listeners} className={styles.dragHandle}>
-        <CryptoCard crypto={crypto} />
-      </div>
-    </div>
-  );
-}
-
 export function CryptoList({ cryptos }: CryptoListProps) {
   const [items, setItems] = useState<CryptoData[]>(cryptos);
 
@@ -104,3 +72,34 @@ export function CryptoList({ cryptos }: CryptoListProps) {
   );
 }
 
+interface SortableCryptoCardProps {
+  crypto: CryptoData;
+}
+
+function SortableCryptoCard({ crypto }: SortableCryptoCardProps) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: crypto.symbol });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <div
+      ref={setNodeRef}
+      style={style}
+      className={`${styles.sortableItem} ${isDragging ? styles.dragging : ""}`}
+    >
+      <div {...attributes} {...listeners} className={styles.dragHandle}>
+        <CryptoCard crypto={crypto} />
+      </div>
+    </div>
+  );
+}
