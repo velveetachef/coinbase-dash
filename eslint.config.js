@@ -18,6 +18,7 @@ export default defineConfig(
       "vitest.setup.ts",
       "remix.env.d.ts",
       "**/*.d.ts",
+      "app/routes/.well-known.*.ts",
     ],
   },
   js.configs.recommended,
