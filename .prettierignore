@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+build/
+dist/
+.react-router/
+
+# Generated files
+*.config.js
+*.config.ts
+remix.env.d.ts
+vitest.setup.ts
+
+# Logs
+*.log
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+

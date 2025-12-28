@@ -10,7 +10,9 @@
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
-  transition: background-color var(--transition-fast), opacity var(--transition-fast);
+  transition:
+    background-color var(--transition-fast),
+    opacity var(--transition-fast);
   box-sizing: border-box;
   line-height: 1;
   min-height: 2.5rem;
@@ -27,4 +29,3 @@
 [data-theme="dark"] .themeToggle:hover {
   background-color: var(--color-gray-600);
 }
-

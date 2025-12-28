@@ -14,9 +14,9 @@ Build a simple, dynamic cryptocurrency dashboard using **Remix** and **React** t
 
 - Display a list of at least **10 cryptocurrencies** (e.g., BTC, ETH, SOL, etc.) in a **responsive card-based layout**.
 - Each card must include:
-    - The cryptocurrency **name** and **symbol**
-    - Current **exchange rate to USD**
-    - Current **exchange rate to Bitcoin (BTC)**
+  - The cryptocurrency **name** and **symbol**
+  - Current **exchange rate to USD**
+  - Current **exchange rate to Bitcoin (BTC)**
 
 ### 2. **Dynamic Data Fetching**
 
@@ -51,8 +51,8 @@ These are not required, but will earn extra points:
 
 - Share your project via GitHub.
 - Include a short **README** with:
-    - Setup instructions
-    - Notes on decisions or tradeoffs you made
+  - Setup instructions
+  - Notes on decisions or tradeoffs you made
 
 ---
 

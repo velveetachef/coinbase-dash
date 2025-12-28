@@ -22,4 +22,3 @@ describe("_index route", () => {
     });
   });
 });
-

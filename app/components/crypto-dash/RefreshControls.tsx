@@ -37,7 +37,7 @@ export function RefreshControls({
           <span aria-hidden="true">⏸</span>
           Disable Auto-Refresh
         </>
-      )
+      );
     }
     return (
       <>
@@ -64,7 +64,9 @@ export function RefreshControls({
         className={`${styles.autoRefreshButton} ${
           autoRefresh ? styles.active : ""
         }`}
-        aria-label={autoRefresh ? "Disable auto-refresh" : "Enable auto-refresh"}
+        aria-label={
+          autoRefresh ? "Disable auto-refresh" : "Enable auto-refresh"
+        }
       >
         {renderAutoRefreshButton()}
       </button>

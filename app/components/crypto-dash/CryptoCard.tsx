@@ -25,11 +25,15 @@ export function CryptoCard({ crypto }: CryptoCardProps) {
       <div className={styles.rates}>
         <div>
           <span className={styles.rateLabel}>USD Rate: </span>
-          <span className={styles.rateValue}>${formatRate(crypto.usdRate)}</span>
+          <span className={styles.rateValue}>
+            ${formatRate(crypto.usdRate)}
+          </span>
         </div>
         <div>
           <span className={styles.rateLabel}>BTC Rate: </span>
-          <span className={styles.rateValue}>{formatRate(crypto.btcRate)} BTC</span>
+          <span className={styles.rateValue}>
+            {formatRate(crypto.btcRate)} BTC
+          </span>
         </div>
       </div>
     </div>

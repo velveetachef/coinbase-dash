@@ -32,10 +32,9 @@ export function initializeTheme(): void {
   try {
     const theme = getInitialTheme();
     document.documentElement.setAttribute("data-theme", theme);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (error) {
     // Fallback to light theme on error
     document.documentElement.setAttribute("data-theme", "light");
   }
 }
-

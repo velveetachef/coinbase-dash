@@ -1,5 +1,9 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { getCryptoData, fetchExchangeRates, CoinbaseExchangeRatesResponse } from "./coinbase";
+import {
+  getCryptoData,
+  fetchExchangeRates,
+  CoinbaseExchangeRatesResponse,
+} from "./coinbase";
 import { cryptoNamesBySymbol } from "./constants";
 
 // Mock fetch globally
@@ -29,7 +33,7 @@ describe("coinbase", () => {
             USDC: "1",
             BAT: "0.0005",
             ZEC: "0.003",
-            XRP: "0.0002"
+            XRP: "0.0002",
           },
         },
       };
@@ -198,4 +202,3 @@ describe("coinbase", () => {
     });
   });
 });
-

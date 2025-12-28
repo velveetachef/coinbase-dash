@@ -1,9 +1,4 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-} from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts } from "@remix-run/react";
 import "./styles/variables.css";
 import "./styles/theme.css";
 
@@ -19,10 +14,7 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="icon"
-          href="data:image/x-icon;base64,AA"
-        />
+        <link rel="icon" href="data:image/x-icon;base64,AA" />
         <Meta />
         <Links />
         <script src="/theme-init.js" />
@@ -34,4 +26,3 @@ export default function App() {
     </html>
   );
 }
-

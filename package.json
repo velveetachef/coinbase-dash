@@ -11,7 +11,9 @@
     "test:ui": "vitest --ui",
     "test": "vitest run",
     "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix"
+    "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "format": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\""
   },
   "repository": {
     "type": "git",
@@ -55,7 +57,9 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.26",
+    "eslint-config-prettier": "^9.1.0",
     "jsdom": "^27.4.0",
+    "prettier": "^3.4.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.50.1",
     "vite": "^6.4.1",

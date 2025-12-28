@@ -1,5 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
-import { getInitialTheme, THEME_STORAGE_KEY, type Theme } from "../lib/utils/theme-utils";
+import {
+  getInitialTheme,
+  THEME_STORAGE_KEY,
+  type Theme,
+} from "../lib/utils/theme-utils";
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme);
@@ -23,5 +27,3 @@ export function useTheme() {
 
   return { theme, toggleTheme };
 }
-
-

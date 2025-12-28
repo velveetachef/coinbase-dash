@@ -106,4 +106,3 @@ describe("ThemeToggle", () => {
     expect(themeToggle).toHaveTextContent("Dark");
   });
 });
-

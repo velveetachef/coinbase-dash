@@ -170,4 +170,3 @@ describe("RefreshControls", () => {
     expect(autoRefreshButton).toHaveTextContent("Disable Auto-Refresh");
   });
 });
-

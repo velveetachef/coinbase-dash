@@ -4,4 +4,3 @@ export interface CryptoData {
   usdRate: number;
   btcRate: number;
 }
-

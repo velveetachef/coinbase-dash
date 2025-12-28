@@ -4,7 +4,7 @@ import userEvent from "@testing-library/user-event";
 import { createRemixStub } from "@remix-run/testing";
 import cryptoDashRoute, { loader } from "./crypto-dash";
 import type { CryptoData } from "~/lib/apis/coinbase/types";
-import { getCryptoData } from '~/lib';
+import { getCryptoData } from "~/lib";
 
 // Mock the getCryptoData function
 vi.mock("~/lib", async (importOriginal) => {
@@ -62,12 +62,17 @@ describe("crypto-dash route", () => {
     it("should return empty array on error", async () => {
       vi.mocked(getCryptoData).mockRejectedValueOnce(new Error("API Error"));
 
-      const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+      const consoleSpy = vi
+        .spyOn(console, "error")
+        .mockImplementation(() => {});
 
       const response = await loader();
       const data = await response.json();
       expect(data.cryptoData).toEqual([]);
-      expect(consoleSpy).toHaveBeenCalledWith("Error fetching crypto data:", expect.any(Error))
+      expect(consoleSpy).toHaveBeenCalledWith(
+        "Error fetching crypto data:",
+        expect.any(Error)
+      );
 
       consoleSpy.mockRestore();
     });
@@ -85,7 +90,9 @@ describe("crypto-dash route", () => {
 
       render(<RemixStub initialEntries={["/crypto-dash"]} />);
 
-      expect(await screen.findByText("Cryptocurrency Dashboard")).toBeInTheDocument();
+      expect(
+        await screen.findByText("Cryptocurrency Dashboard")
+      ).toBeInTheDocument();
     });
 
     it("should render filter input", async () => {
@@ -368,7 +375,5 @@ describe("crypto-dash route", () => {
       setIntervalSpy.mockRestore();
       clearIntervalSpy.mockRestore();
     });
-
   });
 });
-
