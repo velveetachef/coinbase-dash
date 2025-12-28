@@ -12,6 +12,7 @@ export default defineConfig(
       "node_modules/**",
       ".react-router/**",
       "dist/**",
+      "public/**",
       "*.config.js",
       "*.config.ts",
       "vitest.setup.ts",

@@ -9,7 +9,7 @@
     "resolveJsonModule": true,
     "target": "ES2022",
     "strict": true, // Enables all strict type-checking options
-    "allowJs": false,
+    "allowJs": true,
     "skipLibCheck": true, // Skips type checking of declaration files (.d.ts) for faster compilation
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",

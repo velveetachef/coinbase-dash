@@ -1,4 +1,4 @@
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createRemixStub } from "@remix-run/testing";
@@ -7,9 +7,13 @@ import type { CryptoData } from "~/lib/apis/coinbase/types";
 import { getCryptoData } from '~/lib';
 
 // Mock the getCryptoData function
-vi.mock("~/lib", () => ({
-  getCryptoData: vi.fn(),
-}));
+vi.mock("~/lib", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("~/lib")>();
+  return {
+    ...actual,
+    getCryptoData: vi.fn(),
+  };
+});
 
 describe("crypto-dash route", () => {
   const mockCryptoData: CryptoData[] = [
@@ -35,6 +39,14 @@ describe("crypto-dash route", () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    // Reset theme to light mode before each test
+    localStorage.setItem("theme", "light");
+    document.documentElement.setAttribute("data-theme", "light");
+  });
+
+  afterEach(() => {
+    // Clean up localStorage after each test
+    localStorage.removeItem("theme");
   });
 
   describe("loader", () => {
@@ -422,6 +434,85 @@ describe("crypto-dash route", () => {
 
       setIntervalSpy.mockRestore();
       clearIntervalSpy.mockRestore();
+    });
+
+    it("should render theme toggle button", async () => {
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      const themeToggle = await screen.findByRole("button", {
+        name: /Switch to (dark|light) mode/i,
+      });
+      expect(themeToggle).toBeInTheDocument();
+    });
+
+    it("should toggle theme when theme button is clicked", async () => {
+      const user = userEvent.setup();
+      // Set initial theme to light
+      localStorage.setItem("theme", "light");
+      document.documentElement.setAttribute("data-theme", "light");
+
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      const themeToggle = await screen.findByRole("button", {
+        name: /Switch to dark mode/i,
+      });
+
+      expect(themeToggle).toHaveTextContent("Dark");
+
+      await user.click(themeToggle);
+
+      // Verify theme changed to dark
+      expect(localStorage.getItem("theme")).toBe("dark");
+      expect(document.documentElement.getAttribute("data-theme")).toBe("dark");
+      expect(
+        await screen.findByRole("button", { name: /Switch to light mode/i })
+      ).toBeInTheDocument();
+      expect(themeToggle).toHaveTextContent("Light");
+
+      // Toggle back to light
+      await user.click(themeToggle);
+
+      expect(localStorage.getItem("theme")).toBe("light");
+      expect(document.documentElement.getAttribute("data-theme")).toBe("light");
+    });
+
+    it("should initialize theme from localStorage", async () => {
+      localStorage.setItem("theme", "dark");
+      document.documentElement.setAttribute("data-theme", "dark");
+
+      const RemixStub = createRemixStub([
+        {
+          path: "/crypto-dash",
+          Component: cryptoDashRoute,
+          loader: async () => ({ cryptoData: mockCryptoData }),
+        },
+      ]);
+
+      render(<RemixStub initialEntries={["/crypto-dash"]} />);
+
+      const themeToggle = await screen.findByRole("button", {
+        name: /Switch to light mode/i,
+      });
+      expect(themeToggle).toHaveTextContent("Light");
+
+      // Cleanup
+      localStorage.removeItem("theme");
     });
   });
 });
