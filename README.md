@@ -167,19 +167,10 @@ npm run lint
 npm run lint:fix
 ```
 
-## 🎨 Features
-
-- **Real-time Data**: Fetches live cryptocurrency exchange rates from Coinbase API
-- **Drag & Drop**: Intuitive reordering of cryptocurrency cards
-- **Smart Filtering**: Instant search by name or symbol
-- **Auto-refresh**: Optional automatic data updates every 5 seconds
-- **Dark Mode**: Beautiful dark/light theme with smooth transitions
-- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile
-- **Type Safety**: Fully typed with TypeScript
-- **Test Coverage**: Comprehensive unit tests for reliability
-
 ## 📝 Notes & Decisions
-
+- **remix scaffold**: used the quick start guide: https://v2.remix.run/docs/start/quickstart (without react router v7)
+- **CryptoCurrency list**: symbol to name mapping sourced from public endpoint `https://api.coinbase.com/v2/currencies/crypto` and saved in constant `cryptoNamesBySymbol` for demo simplicity.
+- **Exchange Rates API**: USD and BTC exchange rates sourced form public endpoint `https://api.coinbase.com/v2/exchange-rates?currency=<currency>`
 - **Theme Initialization**: Uses an inline script in `public/theme-init.js` to prevent FOUC (Flash of Unstyled Content) by setting the theme before React hydrates
 - **API Integration**: Centralized API client in `app/lib/apis/coinbase/` for maintainability
 - **Component Architecture**: Modular components with CSS Modules for scoped styling

@@ -1,7 +1,7 @@
 
 coinbase
 - No API key required for read-only market data (10 requests/sec)
-- https://api.coinbase.com/v2/currencies/crypto (list with names and ids)
+- https://api.coinbase.com/v2/currencies/crypto (list with names and symbols)
 - https://api.coinbase.com/v2/exchange-rates?currency=USD returns rates for all supported cryptocurrencies
 - https://api.coinbase.com/v2/exchange-rates?currency=BTC returns rates for all supported cryptocurrencies
 - combine data
