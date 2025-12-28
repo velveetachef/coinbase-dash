@@ -2,7 +2,7 @@
 
 A dynamic, real-time cryptocurrency dashboard built with Remix and React that displays live exchange rates from the Coinbase API. Features include drag-and-drop reordering, filtering, auto-refresh, and dark/light mode support.
 
-## 🚀 Technologies Used
+## Technologies Used
 
 - **Framework**: [Remix](https://remix.run/) v2.17.2 - Full-stack React framework
 - **Runtime**: Node.js 24.12.0 (via Volta)
@@ -49,51 +49,51 @@ coinbase-dash/
     └── notes.txt            # Development notes
 ```
 
-## ✅ Requirements Completed
+## Requirements Completed
 
 ### Core Requirements
 
-- ✅ **Cryptocurrency Card Layout**
+- **Cryptocurrency Card Layout**
   - Responsive card-based layout displaying 10+ cryptocurrencies
   - Each card shows: name, symbol, USD rate, and BTC rate
   - Fully responsive design
 
-- ✅ **Dynamic Data Fetching**
+- **Dynamic Data Fetching**
   - Real-time data from Coinbase API
   - Manual refresh button
   - Auto-refresh toggle (5-second intervals)
   - Loading states during refresh
 
-- ✅ **Drag & Drop Reordering**
+- **Drag & Drop Reordering**
   - Full drag-and-drop functionality using @dnd-kit
   - Order persists during session
   - Smooth animations and visual feedback
 
-- ✅ **Filtering**
+- **Filtering**
   - Filter input at top of page
   - Case-insensitive filtering by name or symbol
   - Real-time filtering as you type
 
 ### Bonus Features
 
-- ✅ **Dark/Light Mode Toggle**
+- **Dark/Light Mode Toggle**
   - Theme toggle button in header
   - Persists preference to localStorage
   - Respects system preference on first visit
   - Prevents FOUC (Flash of Unstyled Content)
 
-- ✅ **Loading and Error States**
+- **Loading and Error States**
   - Loading spinner during data fetch
   - Disabled state for refresh button while loading
   - Empty state messages for no data/no matches
   - Error handling with fallback to empty array
 
-- ✅ **Unit Tests**
+- **Unit Tests**
   - Comprehensive test coverage (32 tests)
   - Tests for components, hooks, routes, and API clients
   - Uses Vitest and React Testing Library
 
-## 🛠️ Start-Up Steps
+## Start-Up Steps
 
 ### 1. Clone the Project
 
@@ -164,7 +164,7 @@ npm run lint
 npm run lint:fix
 ```
 
-## 📝 Notes & Decisions
+## Notes & Decisions
 - **remix scaffold**: used the quick start guide: https://v2.remix.run/docs/start/quickstart (without react router v7)
 - **CryptoCurrency list**: symbol to name mapping sourced from public endpoint `https://api.coinbase.com/v2/currencies/crypto` and saved in constant `cryptoNamesBySymbol` for demo simplicity.
 - **Exchange Rates API**: USD and BTC exchange rates sourced form public endpoint `https://api.coinbase.com/v2/exchange-rates?currency=<currency>`
@@ -175,11 +175,7 @@ npm run lint:fix
 - **Error Handling**: Graceful error handling with fallbacks and user-friendly messages
 - **Accessibility**: ARIA labels and keyboard navigation support
 
-## 📄 License
+## License
 
 ISC
-
-## 👤 Author
-
-velveetachef
 
