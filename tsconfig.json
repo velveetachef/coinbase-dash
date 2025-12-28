@@ -1,0 +1,22 @@
+{
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES6"],
+    "isolatedModules": true, // needed for vite / remix
+    "esModuleInterop": true,
+    "jsx": "react-jsx", // no need to import React in every file
+    "moduleResolution": "bundler", // For Vite/webpack-style bundlers
+    "resolveJsonModule": true,
+    "target": "ES2022",
+    "strict": true, // Enables all strict type-checking options
+    "allowJs": true,
+    "skipLibCheck": true, // Skips type checking of declaration files (.d.ts) for faster compilation
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"]
+    },
+    "noEmit": true // TypeScript only type-checks; Vite handles the build output.
+  }
+}
+
