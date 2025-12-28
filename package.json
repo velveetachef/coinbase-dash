@@ -13,7 +13,8 @@
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "format": "prettier --check \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
-    "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\""
+    "format:fix": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -58,6 +59,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.26",
     "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.1.7",
     "jsdom": "^27.4.0",
     "prettier": "^3.4.2",
     "typescript": "^5.9.3",

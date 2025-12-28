@@ -27,14 +27,14 @@ vi.mock("@dnd-kit/sortable", () => ({
   ),
   sortableKeyboardCoordinates: vi.fn(),
   useSortable: vi.fn(() => ({
-    attributes: {},
-    listeners: {},
-    setNodeRef: vi.fn(),
-    transform: null,
-    transition: null,
-    isDragging: false,
+          attributes: {},
+          listeners: {},
+          setNodeRef: vi.fn(),
+          transform: null,
+          transition: null,
+          isDragging: false,
   })),
-  verticalListSortingStrategy: vi.fn(),
+  rectSortingStrategy: vi.fn(),
 }));
 
 vi.mock("@dnd-kit/utilities", () => ({

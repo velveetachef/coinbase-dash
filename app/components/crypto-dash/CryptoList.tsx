@@ -13,7 +13,7 @@ import {
   SortableContext,
   sortableKeyboardCoordinates,
   useSortable,
-  verticalListSortingStrategy,
+  rectSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import type { CryptoData } from "~/lib/apis/coinbase/types";
@@ -60,7 +60,7 @@ export function CryptoList({ cryptos }: CryptoListProps) {
     >
       <SortableContext
         items={items.map((item) => item.symbol)}
-        strategy={verticalListSortingStrategy}
+        strategy={rectSortingStrategy}
       >
         <div className={styles.list}>
           {items.map((crypto) => (
