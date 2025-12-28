@@ -5,6 +5,7 @@ import {
   Scripts,
 } from "@remix-run/react";
 import "./styles/variables.css";
+import "./styles/theme.css";
 
 /**
  * Added suppressHydrationWarning to the <html> element. This tells React to ignore hydration mismatches for this element, which is safe because:
