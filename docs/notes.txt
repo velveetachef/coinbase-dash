@@ -26,5 +26,6 @@ curl https://get.volta.sh | bash
 
 Use quick start guide: https://v2.remix.run/docs/start/quickstart (without react router v7)
 
-
+- eslint
+- vittest for testing (components and typescript)
 
